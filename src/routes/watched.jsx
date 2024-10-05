@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import Loading from "../ui/loading";
 
 export default function WatchedList() {
-  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const watchedList = useSelector((store) => store.lists.watchedList);
   useEffect(() => scrollTo({ top: 0 }), []);

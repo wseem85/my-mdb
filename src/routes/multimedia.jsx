@@ -30,7 +30,7 @@ export async function loader({ params }) {
     params.id,
     params.type
   );
-  console.log(result);
+
   return { result, multimediaError };
 }
 function MultimediapageComponent() {
@@ -116,7 +116,7 @@ function MultimediapageComponent() {
           setUserRating={setUserRating}
           userRating={userRating}
           setModalOpen={setModalOpen}
-          ratings={String(ratings)}
+          rating={rating}
           multimedia={{ id, title, poster, year, genres }}
         >
           <StarRating rating={+rating} setRating={setRating} />

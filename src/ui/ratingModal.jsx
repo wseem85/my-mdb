@@ -23,6 +23,7 @@ export default function RatingModal({
   const dispatch = useDispatch();
   function handleClick() {
     setUserRating(rating);
+    console.log(rating);
     dispatch(addToWatchedList({ ...multimedia, userRating: rating }));
     dispatch(removeFromWatchList(id));
     setModalOpen(false);

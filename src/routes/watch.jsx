@@ -6,11 +6,15 @@ import { IoMdRemove } from "react-icons/io";
 import { IoMdCheckmark } from "react-icons/io";
 import { IoMdHome } from "react-icons/io";
 
-import { removeFromWatchList } from "../features/lists/listsSlice";
+import {
+  clearWatchList,
+  removeFromWatchList,
+} from "../features/lists/listsSlice";
 import { useEffect, useState } from "react";
 import RatingModal from "../ui/ratingModal";
 import { useNavigate } from "react-router-dom";
 import StarRating from "../ui/starRating";
+import { MdDeleteForever } from "react-icons/md";
 
 export default function WatchList() {
   const dispatch = useDispatch();
@@ -57,52 +61,66 @@ export default function WatchList() {
         </div>
       )}
       {watchList && watchList.length !== 0 && (
-        <ul className=" grid sm:grid-cols-2  xl:grid-cols-3 gap-6">
-          {watchList.map((multimedia) => (
-            <li
-              className="flex  gap-8 bg-white p-3 shadow-md "
-              key={multimedia.id}
-            >
-              <img
-                className="max-h-28"
-                src={`${POSTERBASEURLSM}${multimedia.poster}`}
-              />
-              <div className=" flex flex-col gap-6 ">
-                <div className="flex flex-col gap-1">
-                  <h4 className="font-semibold text-lg tracking-wider">
-                    {multimedia.title}
-                  </h4>
-                  <span>{multimedia.year}</span>
-                  <span className="text-red-500"></span>
-                  <span className="text-green-500"></span>
+        <div className="flex flex-col gap-6 ">
+          <div className="w-36 ml-auto">
+            <IconButton
+              handler={() => dispatch(clearWatchList())}
+              type="outlined"
+              color="red-400"
+              colorHover="red-600"
+              icon={<MdDeleteForever />}
+              text="Clear List"
+            />
+          </div>
+          <ul className=" grid sm:grid-cols-2  xl:grid-cols-3 gap-6">
+            {watchList.map((multimedia) => (
+              <li
+                className="flex  gap-8 bg-white p-3 shadow-md "
+                key={multimedia.id}
+              >
+                <img
+                  className="max-h-28"
+                  src={`${POSTERBASEURLSM}${multimedia.poster}`}
+                />
+                <div className=" flex flex-col gap-6 ">
+                  <div className="flex flex-col gap-1">
+                    <h4 className="font-semibold text-lg tracking-wider">
+                      {multimedia.title}
+                    </h4>
+                    <span>{multimedia.year}</span>
+                    <span className="text-red-500"></span>
+                    <span className="text-green-500"></span>
+                  </div>
+                  <div className="flex flex-row gap-2   ">
+                    <IconButton
+                      handler={() =>
+                        dispatch(removeFromWatchList(multimedia.id))
+                      }
+                      align="icon-first"
+                      text="Remove"
+                      color="red-500"
+                      icon={<IoMdRemove />}
+                      size="small"
+                      type="outlined"
+                    />
+                    <IconButton
+                      handler={() => {
+                        setCurrentMultimedia(multimedia);
+                        setModalOpen(true);
+                      }}
+                      align="icon-first"
+                      text="Watched"
+                      color="green-500"
+                      icon={<IoMdCheckmark />}
+                      size="small"
+                      type="outlined"
+                    />
+                  </div>
                 </div>
-                <div className="flex flex-row gap-2   ">
-                  <IconButton
-                    handler={() => dispatch(removeFromWatchList(multimedia.id))}
-                    align="icon-first"
-                    text="Remove"
-                    color="red-500"
-                    icon={<IoMdRemove />}
-                    size="small"
-                    type="outlined"
-                  />
-                  <IconButton
-                    handler={() => {
-                      setCurrentMultimedia(multimedia);
-                      setModalOpen(true);
-                    }}
-                    align="icon-first"
-                    text="Watched"
-                    color="green-500"
-                    icon={<IoMdCheckmark />}
-                    size="small"
-                    type="outlined"
-                  />
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

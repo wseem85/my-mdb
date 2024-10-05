@@ -122,7 +122,7 @@ export default function Homepage() {
           </animated.div>
         </div>
       )}
-      <section id="search" className="space-y-8  border-b-2 pb-8 mb-8">
+      <section id="search" className="space-y-4  border-b-2 pb-8 mb-8">
         <form className="flex gap-3 flex-col justify-center">
           <label htmlFor="search" className="text-center text-2xl ">
             Search Movies , Tv Series
@@ -158,7 +158,7 @@ export default function Homepage() {
               </span>
             </p>
           )}
-          <h3 className="text-center mb-2 text-3xl font-semibold">
+          <h3 className="text-center mb-2 mt-4 text-3xl font-semibold">
             Search Results{" "}
           </h3>
 
