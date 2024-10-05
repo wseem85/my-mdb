@@ -47,7 +47,7 @@ export default function WatchList() {
             <br />
             Start by Browsing Movies and Tv Shows
           </p>
-          <div className="w-16 m-auto">
+          <div className=" m-auto">
             <IconButton
               text="Browse"
               icon={<IoMdHome />}
