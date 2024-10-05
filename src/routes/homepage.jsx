@@ -1,6 +1,5 @@
 import SearchResultRow from "../ui/SearchResultRow";
-import { getTrendingData } from "../services/apiPopularNow";
-import { useLoaderData } from "react-router-dom";
+// import { useLoaderData } from "react-router-dom";
 import TrendingBox from "../ui/trendingBox";
 import TopRatedMultimediaBox from "../ui/topRatedMultimediaBox";
 import { useMultimedisSearch } from "../hooks/useMultimediaSearch";
@@ -9,20 +8,25 @@ import { MdArrowForwardIos, MdClose } from "react-icons/md";
 
 import { animated } from "@react-spring/web";
 import Loading1 from "../ui/loading1";
-import { getTopRated } from "../services/apiTopRated";
-export async function loader() {
-  const trending = await getTrendingData();
+import { useTrending } from "../hooks/useTrending";
+import { useTopRated } from "../hooks/useTopRated";
 
-  const topRated = await getTopRated();
-  return { trending, topRated };
-}
 export default function Homepage() {
   const [sideMenuOpen, setSideMenuOpen] = useState(false);
   const [query, setQuery] = useState("");
   const { searchResults, error, isLoading } = useMultimedisSearch(query);
-  const { topRated, trending } = useLoaderData();
-  const { topRatedMovies, topRatedTv, topRatedError } = topRated;
-  const { trendingData, trendingError } = trending;
+
+  const {
+    trending: trendingData,
+    error: trendingError,
+    isLoadingTrending,
+  } = useTrending();
+  const {
+    topRatedMovies,
+    topRatedTv,
+    error: topRatedError,
+    isLoadingTopRated,
+  } = useTopRated();
 
   // open state to trigger the animation on mount , unmount
   const [open, setOpen] = useState(false);
@@ -185,7 +189,9 @@ export default function Homepage() {
       </section>
       <section id="trending" className="space-y-8   border-b-2 pb-8 mb-8">
         <h3 className="text-center text-3xl font-semibold">Popular Now </h3>
-        {!trendingError ? (
+        {isLoadingTrending ? (
+          <Loading1 />
+        ) : !isLoadingTrending && !trendingError ? (
           <div className=" bg-gray-50 grid px-3 gap-3 md:gap-4 lg:gap-8 xs:grid-cols-2 md:grid-cols-3">
             {trendingData?.map((item) => (
               <TrendingBox key={item.id} item={item} />
@@ -203,7 +209,9 @@ export default function Homepage() {
       </section>
       <section id="topRated" className="space-y-8 px-2   border-b-2 pb-8 mb-8">
         <h3 className="text-center  text-3xl font-semibold">Top Rated</h3>
-        {!topRatedError ? (
+        {isLoadingTopRated ? (
+          <Loading1 />
+        ) : !isLoadingTopRated && !topRatedError ? (
           <div className="flex flex-col gap-4">
             <div className=" border-b-1 border-b-gray-400 pb-6">
               <h4 className=" my-4 text-center text-2xl font-semibold">

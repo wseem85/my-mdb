@@ -9,7 +9,7 @@ const WatchList = lazy(() => import("./routes/watch"));
 const WatchedList = lazy(() => import("./routes/watched"));
 import Errorpage from "./routes/error";
 const AppLayout = lazy(() => import("./ui/appLayout"));
-import { loader as trendingLoader } from "./routes/homepage";
+// import { loader as trendingLoader } from "./routes/homepage";
 import Loading from "./ui/loading";
 const router = createBrowserRouter([
   {
@@ -22,7 +22,6 @@ const router = createBrowserRouter([
         // path: "homepage",
         index: true,
         element: <Homepage />,
-        loader: trendingLoader,
       },
       {
         path: "multimedia/:type/:id",
