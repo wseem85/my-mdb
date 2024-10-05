@@ -99,7 +99,7 @@ export default async function getMultimedia(id, type) {
       const { seasons } = tmdbData;
 
       const omdbRes = await axios.get(
-        `http://www.omdbapi.com/?apikey=${omdbKEY}&t=${tmdbData.name}`
+        `https://www.omdbapi.com/?apikey=${omdbKEY}&t=${tmdbData.name}`
       );
       const { data: omdbData } = omdbRes;
 
