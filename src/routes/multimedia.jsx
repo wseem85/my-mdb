@@ -255,7 +255,7 @@ function MultimediapageComponent() {
               ))}
             </div>
           </div>
-          {writers?.length && (
+          {writers?.length !== 0 && (
             <div className=" flex flex-col gap-1">
               <h3 className="text-lg font-semibold">
                 Creator
@@ -275,7 +275,7 @@ function MultimediapageComponent() {
               </div>
             </div>
           )}
-          {directors?.length && (
+          {directors?.length !== 0 && (
             <div className=" flex flex-col gap-1">
               <h3 className="text-lg font-semibold">
                 Director

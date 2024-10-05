@@ -1,13 +1,16 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import IconButton from "../ui/iconButton";
 import { IoMdHome } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { POSTERBASEURLSM } from "../utils/variables";
 import { useEffect } from "react";
 import Loading from "../ui/loading";
+import { MdDeleteForever } from "react-icons/md";
+import { clearWatchedList } from "../features/lists/listsSlice";
 
 export default function WatchedList() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const watchedList = useSelector((store) => store.lists.watchedList);
   useEffect(() => scrollTo({ top: 0 }), []);
   if (!watchedList) return <Loading />;
@@ -34,36 +37,48 @@ export default function WatchedList() {
         </div>
       )}
       {watchedList && watchedList.length !== 0 && (
-        <ul className=" grid sm:grid-cols-2  xl:grid-cols-3 gap-6">
-          {watchedList.map((multimedia) => (
-            <li
-              className="flex  gap-8 bg-white p-3 shadow-md "
-              key={multimedia.id}
-            >
-              <img
-                className="max-h-28"
-                src={`${POSTERBASEURLSM}${multimedia.poster}`}
-              />
-              <div className=" flex flex-col gap-6 ">
-                <div className="flex flex-col gap-1">
-                  <h4 className="font-semibold text-lg tracking-wider">
-                    {multimedia.title}
-                  </h4>
-                  <span>{multimedia.year}</span>
-                  <div className="flex gap-3 items-center">
-                    {" "}
-                    <span>Your rating </span>{" "}
-                    <span
-                      className={`  w-6  h-6 font-bold flex justify-center items-center rounded-full bg-secondary text-white outline outline-5 outline-secondary border-2 border-grey-500 `}
-                    >
-                      {multimedia.userRating}
-                    </span>
+        <div className="flex flex-col gap-6 ">
+          <div className="w-36 ml-auto">
+            <IconButton
+              handler={() => dispatch(clearWatchedList())}
+              type="outlined"
+              color="red-400"
+              colorHover="red-600"
+              icon={<MdDeleteForever />}
+              text="Clear List"
+            />
+          </div>
+          <ul className=" grid sm:grid-cols-2  xl:grid-cols-3 gap-6">
+            {watchedList.map((multimedia) => (
+              <li
+                className="flex  gap-8 bg-white p-3 shadow-md "
+                key={multimedia.id}
+              >
+                <img
+                  className="max-h-28"
+                  src={`${POSTERBASEURLSM}${multimedia.poster}`}
+                />
+                <div className=" flex flex-col gap-6 ">
+                  <div className="flex flex-col gap-1">
+                    <h4 className="font-semibold text-lg tracking-wider">
+                      {multimedia.title}
+                    </h4>
+                    <span>{multimedia.year}</span>
+                    <div className="flex gap-3 items-center">
+                      {" "}
+                      <span>Your rating </span>{" "}
+                      <span
+                        className={`  w-6  h-6 font-bold flex justify-center items-center rounded-full bg-secondary text-white outline outline-5 outline-secondary border-2 border-grey-500 `}
+                      >
+                        {multimedia.userRating}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

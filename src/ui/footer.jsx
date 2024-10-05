@@ -16,13 +16,13 @@ export default function Footer() {
           <p className="relative ps-3 before:absolute before:content-['']  before:left-[-3px] before:top-[8px] before:w-2 before:h-2 before:bg-white before:rounded-full">
             {" "}
             An App to Search Movies and Tv Shows , showing detailed information
-            about each single Movie or Tv Show Including Rating scores from
+            about each single Movie or Tv Show, Including Rating scores from
             different platforms like <span className="text-active">IMDB </span>,
             <span className="text-active"> TMDB </span>,
             <span className="text-active">Rotten Tomatoes</span>, and{" "}
             <span className="text-active">Metacritic </span>.
             <br />
-            Adding Movies ot TV Shows to Watch List or Watched List ,Giving them
+            Adding Movies or TV Shows to Watch List or Watched List ,Giving them
             Your <span className="text-active">own Rating </span> and much more
             ...
           </p>
