@@ -1,8 +1,17 @@
-# React + Vite
+# MY-MDB Movie App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+*. An App to Search Movies and Tv Shows , showing detailed information about each single Movie or Tv Show, Including Rating scores from different platforms like IMDB , TMDB ,Rotten Tomatoes, and Metacritic .
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Adding Movies or TV Shows to Watch List or Watched List ,Giving them Your own Rating and much more ...
+*. This App also shows Popular Movies And Tv Shows in addition to Top Rated Movies and Tv Shows.
+*. This App Collect Information about Movies and Tv Shows from both TMDB API and OMDB API.
+
+## Technologies
+
+*. React js
+*. React Router
+*. Redux/Redux Tollkit
+*. Tailwindcss
+*. axios
